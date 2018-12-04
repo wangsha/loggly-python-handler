@@ -9,10 +9,12 @@ from requests_futures.sessions import FuturesSession
 session = FuturesSession()
 
 
-def bg_cb(sess, resp):
+
+def bg_cb(resp, *args, **kwargs):
     """ Don't do anything with the response """
     pass
 
+session.hooks['response'] = bg_cb
 
 class HTTPSHandler(logging.Handler):
     def __init__(self, url, fqdn=False, localname=None, facility=None):
@@ -31,7 +33,7 @@ class HTTPSHandler(logging.Handler):
     def emit(self, record):
         try:
             payload = self.format(record)
-            session.post(self.url, data=payload, background_callback=bg_cb)
+            session.post(self.url, data=payload)
         except (KeyboardInterrupt, SystemExit):
             raise
         except:
