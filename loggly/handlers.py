@@ -10,11 +10,11 @@ session = FuturesSession()
 
 
 
-def bg_cb(resp, *args, **kwargs):
+def response_hook(resp, *args, **kwargs):
     """ Don't do anything with the response """
     pass
 
-session.hooks['response'] = bg_cb
+session.hooks['response'] = response_hook
 
 class HTTPSHandler(logging.Handler):
     def __init__(self, url, fqdn=False, localname=None, facility=None):
