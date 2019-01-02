@@ -1,7 +1,5 @@
 import logging
 import logging.handlers
-
-import socket
 import traceback
 
 from requests_futures.sessions import FuturesSession
@@ -9,12 +7,13 @@ from requests_futures.sessions import FuturesSession
 session = FuturesSession()
 
 
-
-def response_hook(resp, *args, **kwargs):
+def response_callback(resp, *args, **kwargs):
     """ Don't do anything with the response """
     pass
 
-session.hooks['response'] = response_hook
+
+session.hooks['response'] = response_callback
+
 
 class HTTPSHandler(logging.Handler):
     def __init__(self, url, fqdn=False, localname=None, facility=None):
