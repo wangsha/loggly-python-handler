@@ -13,7 +13,7 @@ setup(
     license="MIT",
     packages=find_packages(),
     install_requires=[
-        "requests-futures >= 0.9.4",
+        "requests-futures >= 0.9.9",
     ],
     include_package_data=True,
     platform='any',
